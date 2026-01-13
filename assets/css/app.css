@@ -100,7 +100,10 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 /* Make LiveView wrapper divs transparent for layout */
-[data-phx-session], [data-phx-teleported-src] { display: contents }
+[data-phx-session],
+[data-phx-teleported-src] {
+  display: contents
+}
 
 /* This file is for your main application CSS */
 
@@ -111,4 +114,20 @@
   box-shadow: none !important;
   border-color: #3b82f6;
   /* blue-500 */
+}
+
+@keyframes fadeInOut {
+
+  0%,
+  100% {
+    opacity: 0.05;
+  }
+
+  50% {
+    opacity: 0.15;
+  }
+}
+
+.animated-logo {
+  animation: fadeInOut 8s ease-in-out infinite;
 }

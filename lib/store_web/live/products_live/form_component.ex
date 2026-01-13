@@ -1,6 +1,8 @@
 defmodule StoreWeb.ProductsLive.FormComponent do
   use StoreWeb, :live_component
 
+  alias Store.Products
+
   def update(assigns, socket) do
     changeset = Ecto.Changeset.change(assigns.product)
     form = to_form(changeset)
@@ -26,5 +28,43 @@ defmodule StoreWeb.ProductsLive.FormComponent do
       </.simple_form>
     </div>
     """
+  end
+
+  def handle_event("save-products", %{"product" => product_params}, socket) do
+    socket = save_product(socket, socket.assigns.live_action, product_params)
+
+    {:noreply, socket}
+  end
+
+  defp save_product(socket, :new, product_params) do
+    case Products.create_products(product_params) do
+      {:ok, _changes} ->
+        socket
+        |> put_flash(:info, "Products was Created Successfully")
+        |> push_navigate(to: socket.assigns.patch)
+
+      {:error, _failed_op, changeset, _changes} ->
+        form = to_form(changeset)
+
+        socket
+        |> assign(:form, form)
+    end
+  end
+
+  defp save_product(socket, :edit, product_params) do
+    product = socket.assigns.product
+
+    case Products.update_products(product, product_params) do
+      {:ok, _changes} ->
+        socket
+        |> put_flash(:info, "Product was Update Successfully.")
+        |> push_navigate(to: socket.assigns.patch)
+
+      {:error, _failed_op, changeset, _changes} ->
+        form = to_form(changeset)
+
+        socket
+        |> assign(:form, form)
+    end
   end
 end

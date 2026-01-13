@@ -40,7 +40,10 @@ defmodule StoreWeb.ProductsLive.Index do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash}>
-      <h2>Listing Product</h2>
+      <div class="mb-8">
+        <h1 class="text-4xl font-bold">Listing Product</h1>
+        <p class="text-gray-500 text-sm">Manage all store products here</p>
+      </div>
 
       <div class="flex justify-end mb-4">
         <.link patch={~p"/products/new"}>
@@ -56,6 +59,8 @@ defmodule StoreWeb.ProductsLive.Index do
             id={:new}
             module={StoreWeb.ProductsLive.FormComponent}
             product={@product}
+            patch={@patch}
+            live_action={@live_action}
           />
         </.modal>
       <% end %>
@@ -67,6 +72,22 @@ defmodule StoreWeb.ProductsLive.Index do
         </:col>
         <:col :let={product} label="Product Name">{product.product_name}</:col>
         <:col :let={product} label="Description">{product.description}</:col>
+        <:action :let={product}>
+          <.link
+            navigate={~p"/products/#{product}"}
+            class="rounded-lg bg-zinc-50 px-2 py-2 hover:bg-zinc-200/100"
+          >
+            show
+          </.link>
+
+          <.button
+            class="hover:text-primary"
+            phx-click="delete-product"
+            phx-value-id={product.id}
+          >
+            delete
+          </.button>
+        </:action>
       </.table>
     </Layouts.app>
     """

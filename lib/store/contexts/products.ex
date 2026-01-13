@@ -12,7 +12,13 @@ defmodule Store.Products do
 
   def create_products(params) do
     %Product{}
-    |> Ecto.Changeset.cast(params, [:product_image, :product_name, :decription])
+    |> Ecto.Changeset.cast(params, [:product_image, :product_name, :description])
     |> Repo.insert()
+  end
+
+  def update_products(product, params) do
+    product
+    |> Ecto.Changeset.cast(params, [:product_image, :product_name, :description])
+    |> Repo.update()
   end
 end
