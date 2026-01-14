@@ -42,7 +42,6 @@ defmodule StoreWeb.ProductsLive.Index do
     <Layouts.app flash={@flash}>
       <div class="mb-8">
         <h1 class="text-4xl font-bold">Listing Product</h1>
-        <p class="text-gray-500 text-sm">Manage all store products here</p>
       </div>
 
       <div class="flex justify-end mb-4">
@@ -91,5 +90,16 @@ defmodule StoreWeb.ProductsLive.Index do
       </.table>
     </Layouts.app>
     """
+  end
+
+  def handle_event("delete-product", %{"id" => id}, socket) do
+    Products.delete_product(id)
+
+    socket =
+      socket
+      |> put_flash(:info, "Product was deleted successfully.")
+      |> push_navigate(to: socket.assigns.patch)
+
+    {:noreply, socket}
   end
 end

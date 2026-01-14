@@ -18,7 +18,7 @@ defmodule StoreWeb.ProductsLive.FormComponent do
   def render(assigns) do
     ~H"""
     <div class="overflow-x-auto">
-      <h2>New Product</h2>
+      <h2>Edit Product</h2>
 
       <.simple_form for={@form} phx-target={@myself} phx-submit="save-products">
         <.input type="url" field={@form[:product_image]} label="Product Image" />
