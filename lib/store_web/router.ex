@@ -23,6 +23,12 @@ defmodule StoreWeb.Router do
     live "/products/new", ProductsLive.Index, :new
     live "/products/:id", ProductsLive.Show, :show
     live "/products/:id/show/edit", ProductsLive.Show, :edit
+
+    live "/stocks", StockLive.Index, :index
+    live "/stocks/new", StockLive.Index, :index
+    live "/stocks/:id", StockLive.Show, :show
+
+    live "/movements", MovementLive.Index, :index
   end
 
   # Other scopes may use custom stacks.
