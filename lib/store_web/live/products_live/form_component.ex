@@ -21,9 +21,9 @@ defmodule StoreWeb.ProductsLive.FormComponent do
       <h2>Edit Product</h2>
 
       <.simple_form for={@form} phx-target={@myself} phx-submit="save-products">
-        <.input type="url" field={@form[:product_image]} label="Product Image" />
-        <.input type="text" field={@form[:product_name]} label="Product Name" />
-        <.input type="textarea" field={@form[:description]} label="Description" />
+        <.input type="url" field={@form[:product_image]} label="Product Image" step="0.01" required />
+        <.input type="text" field={@form[:product_name]} label="Product Name" step="0.01" required />
+        <.input type="textarea" field={@form[:description]} label="Description" step="0.01" required />
         <.button>Save</.button>
       </.simple_form>
     </div>
