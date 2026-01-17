@@ -19,8 +19,16 @@ defmodule StoreWeb.MovementLive.Index do
       <h1 class="text-2xl font-bold mb-4">Movements</h1>
 
       <.table id="movements" rows={@movements}>
-        <:col :let={movement} label="Stock">
-          {movement.stock_id}
+        <:col :let={movement} label="ID">
+          {movement.id}
+        </:col>
+
+        <:col :let={movement} label="Stock_id">
+          <%= if movement.stock && movement.stock.product do %>
+            {movement.stock.product.product_name}
+          <% else %>
+            -
+          <% end %>
         </:col>
 
         <:col :let={movement} label="Type">

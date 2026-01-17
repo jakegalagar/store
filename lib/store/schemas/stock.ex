@@ -3,11 +3,13 @@ defmodule Store.Stocks.Stock do
 
   import Ecto.Changeset
   alias Store.Products.Product
+  alias Store.Movements.Movement
 
   schema "stocks" do
     field :quantity, :integer
 
     belongs_to :product, Product
+    has_many :movements, Movement
 
     timestamps()
   end

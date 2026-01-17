@@ -3,7 +3,8 @@ defmodule Store.Movements do
   alias Store.Repo
   alias Store.Movements.Movement
 
-  def list_movements() do
+  def list_movements do
     Repo.all(Movement)
+    |> Repo.preload(stock: [:product])
   end
 end
