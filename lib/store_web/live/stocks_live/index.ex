@@ -21,14 +21,6 @@ defmodule StoreWeb.StockLive.Index do
     <Layouts.app flash={@flash}>
       <h1 class="text-4xl font-bold mb-6">Stocks</h1>
 
-      <div class="flex justify-end mb-4">
-        <.link patch={~p"/stocks/new"}>
-          <button class="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded-lg shadow">
-            Add Stocks
-          </button>
-        </.link>
-      </div>
-
       <.table id="stocks" rows={@stocks}>
         <:col :let={stock} label="ID">{stock.id}</:col>
 
